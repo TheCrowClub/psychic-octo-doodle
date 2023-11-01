@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}
+  Search Result of {{ query }}
+{% endblock %}
+
+{% block body %}
+  {% if videos %}
+    <div class="row">
+      <div class="col-12">
+        <h1 style="text-align: center;">Search Result for {{ query }}</h1>
+      </div>
+    </div>
+    <div class="row">
+      {% for video in videos %}
+        <div class="col-4">
+          <div class="card">
+            <img src="https://img.youtube.com/vi/{{ video.videoID }}/0.jpg" class="card-img-top" alt="{{ video.title }}" />
+            <div class="card-body">
+              <a href="{% url 'watch' video.pk %}"><h5 class="card-title">{{ video.title }}</h5></a>
+
+              <p class="card-text">{{ video.description|truncatechars:100 }}...........</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="row" style="padding-bottom: 20px;">
+      <div class="col-12">
+        <h1 style="text-align: center;">No result found for query <b>{{ query }}</b></h1>
+      </div>
+    </div>
+    <div class="row" style="text-align: center; padding-bottom: 100px;">
+      <form action="{% url 'search' %}" method="get">
+        <label for="query">Search Again</label>
+        <input class="form-control border-end-0 border rounded-pill" type="text" value="browser" name="query" />
+        <span class="input-group-append"><button class="btn btn-outline-secondary bg-white border-start-0 border rounded-pill ms-n3" type="button"><i class="fa fa-search"></i> Submit</button></span>
+      </form>
+    </div>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "brihitube"
+version = "0.1.0"
+description = "Assignment of Bohubrihi Django Module"
+authors = ["rozari0 <rozario@tuta.io>"]
+license = "GPL3"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+Django = "^4.2.6"
+django-allauth = "^0.58.0"
+crispy-bootstrap5 = "^0.7"
+pillow = "^10.1.0"
+whitenoise = "^6.6.0"
+django-cleanup = "^8.0.0"
+gunicorn = "^21.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

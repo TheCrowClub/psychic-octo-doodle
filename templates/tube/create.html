@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Create Video
+{% endblock %}
+{% block body %}
+  {% load crispy_forms_tags %}
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button class="btn btn-success" type="submit">Post</button>
+  </form>
+
+  <script>
+    document.getElementById('id_videoID').addEventListener('input', (e) => {
+      fetch(`https://onion.tube/api/v1/videos/${document.getElementById('id_videoID').value}?fields=videoId,title,description,videoThumbnails&pretty=1`)
+        .then((res) => {
+          return res.json()
+        })
+        .then((res) => {
+          console.log(res)
+          document.getElementById('id_title').value = res.title
+          document.getElementById('id_description').value = res.description
+        })
+    })
+  </script>
+{% endblock %}
