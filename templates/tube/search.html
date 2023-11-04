@@ -10,6 +10,26 @@
         <h1 style="text-align: center;">Search Result for {{ query }}</h1>
       </div>
     </div>
+    <div class="row" style="text-align: center; padding-bottom: 100px;">
+      <form action="{% url 'search' %}" method="get">
+        <label for="query">Search Again</label>
+        <input class="form-control border-end-0 border rounded-pill" type="text" value="" name="query" />
+        <select class="form-select" id="category" name="category">
+          <option value="">Select a category</option>
+          <option value="MUSIC">Music</option>
+          <option value="ANIFILM">Animation and Film</option>
+          <option value="PETS">Pets and Animals</option>
+          <option value="SPORTS">Sports</option>
+          <option value="GAMING">Gaming</option>
+          <option value="NEWS">News</option>
+          <option value="POLITICS">Politics</option>
+          <option value="EDUCATION">Education</option>
+          <option value="SCITECH">Science And Technology</option>
+          <option value="OTHERS">Others</option>
+        </select>
+        <span class="input-group-append"><button class="btn btn-outline-secondary bg-white border-start-0 border rounded-pill ms-n3" type="submit"><i class="fa fa-search"></i> Submit</button></span>
+      </form>
+    </div>
     <div class="row">
       {% for video in videos %}
         <div class="col-4">
@@ -34,7 +54,20 @@
       <form action="{% url 'search' %}" method="get">
         <label for="query">Search Again</label>
         <input class="form-control border-end-0 border rounded-pill" type="text" value="browser" name="query" />
-        <span class="input-group-append"><button class="btn btn-outline-secondary bg-white border-start-0 border rounded-pill ms-n3" type="button"><i class="fa fa-search"></i> Submit</button></span>
+        <select class="form-select" id="category" name="category">
+          <option value="">Select a category</option>
+          <option value="MUSIC">Music</option>
+          <option value="ANIFILM">Animation and Film</option>
+          <option value="PETS">Pets and Animals</option>
+          <option value="SPORTS">Sports</option>
+          <option value="GAMING">Gaming</option>
+          <option value="NEWS">News</option>
+          <option value="POLITICS">Politics</option>
+          <option value="EDUCATION">Education</option>
+          <option value="SCITECH">Science And Technology</option>
+          <option value="OTHERS">Others</option>
+        </select>
+        <span class="input-group-append"><button class="btn btn-outline-secondary bg-white border-start-0 border rounded-pill ms-n3" type="submit"><i class="fa fa-search"></i> Submit</button></span>
       </form>
     </div>
   {% endif %}

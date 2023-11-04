@@ -64,12 +64,15 @@ def dashboard(request):
 
 def search(request):
     query = request.GET.get("query", "")
+    category = request.GET.get("category", "")
     if not query:
         pass
-    print(query)
+    print(query, category)
     videos = Video.objects.filter(
         Q(title__icontains=query) | Q(description__icontains=query)
     )
+    if category != "":
+        videos = videos.filter(category=category)
     return render(
         request,
         template_name="tube/search.html",

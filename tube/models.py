@@ -6,7 +6,19 @@ from django.urls import reverse
 from accounts.models import User
 
 
-# Create your models here.
+class Categories(models.TextChoices):
+    MUSIC = "MUSIC", "Music"
+    ANIFILM = "ANIFILM", "Animation and Film"
+    PETS = "PETS", "Pets and Animals"
+    SPORTS = "SPORTS", "Sports"
+    GAMING = "GAMING", "Gaming"
+    NEWS = "NEWS", "News"
+    POLITICS = "POLITICS", "Politics"
+    EDUCATION = "EDUCATION", "Education"
+    SCINECEANDTECH = "SCITECH", "Science And Technology"
+    OTHERS = "OTHERS", "Others"
+
+
 class Video(models.Model):
     uploader = models.ForeignKey(
         User,
@@ -16,6 +28,9 @@ class Video(models.Model):
     title = models.CharField(verbose_name="Video Title", max_length=250)
     videoID = models.CharField(
         verbose_name="Youtube Video Id", max_length=20, primary_key=True
+    )
+    category = models.CharField(
+        max_length=30, choices=Categories.choices, default=Categories.OTHERS
     )
     description = models.TextField(verbose_name="Description of the Video")
 

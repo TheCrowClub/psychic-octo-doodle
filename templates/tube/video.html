@@ -5,59 +5,108 @@
 
 {% block body %}
   <style>
-    .embed-container {
+    .video-container {
+      margin-top: 20px;
+    }
+    
+    .video-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    
+    .video-category {
+      font-size: 16px;
+      color: gray;
+      margin-bottom: 10px;
+    }
+    
+    .video-description {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    
+    .comment-box {
+      margin-top: 20px;
+    }
+    
+    .comment-box form {
+      margin-bottom: 10px;
+    }
+    
+    .comment-box textarea {
+      width: 100%;
+      height: 100px;
+    }
+    
+    .comment-box button {
+      float: right;
+    }
+    .embedtool {
       position: relative;
-      padding-bottom: 56.25%;
       height: 0;
+      padding-top: 56%;
       overflow: hidden;
       max-width: 100%;
     }
-    .embed-container iframe,
-    .embed-container object,
-    .embed-container embed {
+    .embedtool iframe,
+    .embedtool object,
+    .embedtool embed {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      height: 80%;
+      height: 100%;
+    }
+    .embedtool .fluid-vids {
+      position: initial !important;
     }
   </style>
-  <div class="embed-container">
-    <iframe src="https://youtube.com/embed/{{ video.pk }}" frameborder="1" allowfullscreen></iframe>
-  </div>
-  <div>
-    <h1><strong>{{ video.title }}</strong></h1>
-    <p>{{ video.description|linebreaks }}</p>
-  </div>
   <div class="container">
-    {% load crispy_forms_tags %}
-    <div class="card">
-      <div class="card-header">
-        <h5>Comments</h5>
-      </div>
-      <div class="card-body">
-        <div class="list-group list-group-flush">
-          {% for comment in comments %}
-            <li class="list-group-item">
-              <img src="https://placehold.it/32x32" class="rounded-circle" alt="Commenter avatar" />
+    <h1 class="text-center">{{ video.title }}</h1>
 
-              <span class="fw-bold">{{ comment.author.first_name }}</span>
-              <p>{{ comment.comment }}</p>
-            </li>
-          {% endfor %}
+    <div class="embed-responsive embed-responsive-16by9">
+      <div class="embedtool">
+        <iframe src="https://www.youtube.com/embed/{{ video.pk }}" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <p>
+      <strong>Video Category:</strong> {{ video.category }}
+    </p>
+
+    <p>{{ video.description|linebreaks }}</p>
+
+    <div>
+      {% load crispy_forms_tags %}
+      <div class="card">
+        <div class="card-header">
+          <h5>Comments</h5>
         </div>
-        <hr />
-        {% if user.is_authenticated %}
-          <form action="" method="post">
-            {{ commentform|crispy }}
-            {% csrf_token %}
-            <button class="btn btn-primary" type="submit">Comment</button>
-          </form>
-        {% else %}
-          <div class="container">
-            <h3><a href="{% url 'login' %}">Login</a> to comment.</h3>
+        <div class="card-body">
+          <div class="list-group list-group-flush">
+            {% for comment in comments %}
+              <li class="list-group-item">
+                <img src="https://placehold.it/32x32" class="rounded-circle" alt="Commenter avatar" />
+
+                <span class="fw-bold">{{ comment.author.first_name }}</span>
+                <p>{{ comment.comment }}</p>
+              </li>
+            {% endfor %}
           </div>
-        {% endif %}
+          <hr />
+          {% if user.is_authenticated %}
+            <form action="" method="post">
+              {{ commentform|crispy }}
+              {% csrf_token %}
+              <button class="btn btn-primary" type="submit">Comment</button>
+            </form>
+          {% else %}
+            <div class="container">
+              <h3><a href="{% url 'login' %}">Login</a> to comment.</h3>
+            </div>
+          {% endif %}
+        </div>
       </div>
     </div>
   </div>

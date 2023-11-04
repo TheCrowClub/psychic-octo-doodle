@@ -15,5 +15,6 @@ class VideoForm(forms.ModelForm):
         fields = (
             "title",
             "videoID",
+            "category",
             "description",
         )
